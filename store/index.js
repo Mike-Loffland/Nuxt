@@ -15,6 +15,7 @@ const createStore = () => {
     actions: {
       // special action dispatched by nuxt
       // *** nuxtServerInit requires that you return a Promise if you're executing an async action
+      // ***** nuxtServerInit will do all the magic to initialize data in the store
       nuxtServerInit(vuexContext, nuxtContext) {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
