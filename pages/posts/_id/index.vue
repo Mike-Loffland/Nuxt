@@ -22,7 +22,7 @@ export default {
     asyncData(context) {
       let fireBaseDocument = `${context.params.id}.json`
       return axios
-        .get(`${fireBase.url}${fireBaseDocument}`)
+        .get(`${fireBase.url}posts/${fireBaseDocument}`)
         .then(axiosResponse => {
           let { data } = axiosResponse
           // asyncData will merge with component data
