@@ -3,14 +3,20 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <PostList />
+    <PostList :posts="loadedPosts" v-if="loadedPosts"/>
   </div>
 </template>
 <script>
 import PostList from '@/components/posts/PostList'
+
 export default {
   components: {
     PostList
+  },
+  computed: {
+    loadedPosts(){
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
