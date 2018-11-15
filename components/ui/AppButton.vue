@@ -51,15 +51,28 @@ export default {
   border: 1px solid transparent;
 }
 
-.cancel {
+.delete {
   background-color: red;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.delete:hover,
+.delete:active {
+  background-color: salmon;
+  border: 1px solid transparent;
+  color: white;
+}
+
+.cancel {
+  background-color: gray;
   color: white;
   border: 1px solid transparent;
 }
 
 .cancel:hover,
 .cancel:active {
-  background-color: salmon;
+  background-color: rgb(78, 78, 78);
   border: 1px solid transparent;
   color: white;
 }

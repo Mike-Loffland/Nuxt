@@ -8,9 +8,19 @@
 
     <AppControlInput
               control-type="textarea"
+              v-model="editedPost.previewContent">Preview Text</AppControlInput>
+
+    <AppControlInput
+              control-type="textarea"
               v-model="editedPost.content">Content</AppControlInput>
 
     <AppButton type="submit">Save</AppButton>
+
+    <AppButton v-if="editedPost.id"
+              type="button"
+              style="margin-left: 10px"
+              btn-style="delete"
+              @click="onDelete">Delete</AppButton>
 
     <AppButton
               type="button"
@@ -40,13 +50,17 @@ export default {
         author: '',
         title: '',
         thumbnailLink: '',
+        previewContent: '',
         content: ''
       }
     }
   },
   methods: {
     onSave(){
-      console.log(this.editedPost)
+      this.$emit('submitpost', this.editedPost)
+    },
+    onDelete(){
+      this.$emit('deletepost', this.editedPost)
     },
     onCancel(){
       this.$router.push('/admin')
