@@ -30,14 +30,8 @@
   </form>
 </template>
 <script>
-import AppControlInput from '@/components/ui/AppControlInput'
-import AppButton from '@/components/ui/AppButton'
 
 export default {
-  components: {
-    AppControlInput,
-    AppButton
-  },
   props: {
     post: {
       type: Object,

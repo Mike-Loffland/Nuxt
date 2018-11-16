@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updatedDate | formatDate }}</div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -15,18 +15,16 @@
 </template>
 
 <script>
-import $axios from '@/axiosWrap'
 
 export default {
     asyncData(context) {
       let fireBaseDocument = `${context.params.id}.json`
-      return $axios
-        .get(`posts/${fireBaseDocument}`)
+      return context.app.$axios
+        .$get(`posts/${fireBaseDocument}`)
         .then(axiosResponse => {
-          let { data } = axiosResponse
           // asyncData will merge with component data
           return {
-            loadedPost: data
+            loadedPost: axiosResponse
           }
         })
         .catch(err => {

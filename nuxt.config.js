@@ -43,12 +43,22 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+
+  // interface to execute/load functionality before the app is fully rendered and mounted
+  // *** the code executed does NOT have to be Vue specific... just use it to run ANY code you want executed before the app is mounted
+  plugins: ['~plugins/core-components.js', '~plugins/date-filter.js'],
 
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+
+  // allows you to add convenience features to your Nuxt app
+  // https://github.com/nuxt-community/awesome-nuxt#modules
+  // https://nuxtjs.org/guide/modules/
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://blog-bb78a.firebaseio.com/',
+  },
 
   /*
    ** Build configuration

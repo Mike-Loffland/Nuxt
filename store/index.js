@@ -1,6 +1,5 @@
 // Vuex is installed with Nuxt
 import Vuex from 'vuex'
-import $axios from '@/axiosWrap'
 import { fireBase } from '@/localconfig.js'
 
 const createStore = () => {
@@ -30,14 +29,17 @@ const createStore = () => {
         // special action dispatched by nuxt
         // *** nuxtServerInit requires that you return a Promise if you're executing an async action
         // ***** nuxtServerInit will do all the magic to initialize data in the store
-        return $axios
-          .get(fireBase.postsJsonNode)
+
+        // NOTE: .$axios is available because of the @nuxtjs/axios module
+        // **** in the nuxtServerInit, the methods are prefaced with a $ (.get becomes .$get)
+        return nuxtContext.app.$axios
+          .$get(fireBase.postsJsonNode)
           .then(axiosResponse => {
             const postArray = []
-            let { data } = axiosResponse
-            Object.keys(data).forEach(key => {
-              postArray.push({ ...data[key], id: key })
+            Object.keys(axiosResponse).forEach(key => {
+              postArray.push({ ...axiosResponse[key], id: key })
             })
+
             vuexContext.dispatch('setPosts', postArray)
           })
           .catch(err => {
@@ -49,7 +51,7 @@ const createStore = () => {
       },
       addPost({ commit }, post) {
         let createdPost = { ...post, updatedDate: new Date() }
-        return $axios
+        return this.$axios
           .post(fireBase.postsJsonNode, createdPost)
           .then(result => {
             commit('ADD_POST', { ...createdPost, id: result.data.name })
@@ -61,7 +63,7 @@ const createStore = () => {
       updatePost({ commit }, post) {
         let fireBaseDocument = `${post.id}.json`
         post.updatedDate = new Date()
-        return $axios
+        return this.$axios
           .put(`${fireBase.postsNode}${fireBaseDocument}`, post)
           .then(result => {
             commit('UPDATE_POST', post)
@@ -72,7 +74,7 @@ const createStore = () => {
       },
       deletePost({ commit }, post) {
         let fireBaseDocument = `${post.id}.json`
-        return $axios
+        return this.$axios
           .delete(`${fireBase.postsNode}${fireBaseDocument}`)
           .then(result => {
             commit('REMOVE_POST', post)
