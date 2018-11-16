@@ -64,4 +64,33 @@ module.exports = {
   env: {
     baseUrl: process.env.BASE_URL || 'https://blog-bb78a.firebaseio.com/',
   },
+
+  //set the rootDir... default is '' .. set the path relative to your node_modules folder (essentially)
+  //rootDir: '',
+
+  // where do all of your nuxt specific folders live? pages, layouts, etc..
+  // srcDir: 'some-folder/sub-folder/',
+
+  // .fade-enter-active class is defined in styles/mycustomglobal.css
+  // use the prefix (as defined in Vue docs)
+  transition: {
+    name: 'fade',
+    mode: 'out-in',
+  },
+
+  router: {
+    // example of adding a route programatically (instead of the folder based approach)
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/booger',
+        component: resolve(__dirname, 'pages/index.vue'),
+      })
+    },
+    //linkActiveClass: 'some-custom-class',
+  },
+
+  // change the way Nuxt generates static pages
+  // generate: {
+
+  // }
 }
