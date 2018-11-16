@@ -15,14 +15,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { fireBase } from '@/localconfig.js'
+import $axios from '@/axiosWrap'
 
 export default {
     asyncData(context) {
       let fireBaseDocument = `${context.params.id}.json`
-      return axios
-        .get(`${fireBase.url}posts/${fireBaseDocument}`)
+      return $axios
+        .get(`posts/${fireBaseDocument}`)
         .then(axiosResponse => {
           let { data } = axiosResponse
           // asyncData will merge with component data
@@ -33,6 +32,9 @@ export default {
         .catch(err => {
           context.error(err)
         })
+    },
+    head: {
+      title: 'Individual blog entry'
     }
 }
 </script>

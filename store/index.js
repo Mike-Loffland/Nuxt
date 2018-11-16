@@ -1,6 +1,6 @@
 // Vuex is installed with Nuxt
 import Vuex from 'vuex'
-import axios from 'axios'
+import $axios from '@/axiosWrap'
 import { fireBase } from '@/localconfig.js'
 
 const createStore = () => {
@@ -30,9 +30,8 @@ const createStore = () => {
         // special action dispatched by nuxt
         // *** nuxtServerInit requires that you return a Promise if you're executing an async action
         // ***** nuxtServerInit will do all the magic to initialize data in the store
-        let fireBaseNode = 'posts.json'
-        return axios
-          .get(`${fireBase.url}${fireBaseNode}`)
+        return $axios
+          .get(fireBase.postsJsonNode)
           .then(axiosResponse => {
             const postArray = []
             let { data } = axiosResponse
@@ -49,10 +48,9 @@ const createStore = () => {
         commit('SET_POSTS', posts)
       },
       addPost({ commit }, post) {
-        let fireBaseNode = 'posts.json'
         let createdPost = { ...post, updatedDate: new Date() }
-        return axios
-          .post(`${fireBase.url}${fireBaseNode}`, createdPost)
+        return $axios
+          .post(fireBase.postsJsonNode, createdPost)
           .then(result => {
             commit('ADD_POST', { ...createdPost, id: result.data.name })
           })
@@ -63,8 +61,8 @@ const createStore = () => {
       updatePost({ commit }, post) {
         let fireBaseDocument = `${post.id}.json`
         post.updatedDate = new Date()
-        return axios
-          .put(`${fireBase.url}posts/${fireBaseDocument}`, post)
+        return $axios
+          .put(`${fireBase.postsNode}${fireBaseDocument}`, post)
           .then(result => {
             commit('UPDATE_POST', post)
           })
@@ -74,8 +72,8 @@ const createStore = () => {
       },
       deletePost({ commit }, post) {
         let fireBaseDocument = `${post.id}.json`
-        return axios
-          .delete(`${fireBase.url}/posts/${fireBaseDocument}`)
+        return $axios
+          .delete(`${fireBase.postsNode}${fireBaseDocument}`)
           .then(result => {
             commit('REMOVE_POST', post)
           })

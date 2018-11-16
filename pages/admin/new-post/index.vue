@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import AdminPostForm from '@/components/ui/admin/AdminPostForm'
 
 export default {

@@ -7,8 +7,7 @@
 </template>
 <script>
 import AdminPostForm from '@/components/ui/admin/AdminPostForm'
-import axios from 'axios'
-import { fireBase } from '@/localconfig.js'
+import $axios from '@/axiosWrap'
 
 export default {
   layout: 'admin',
@@ -17,8 +16,8 @@ export default {
   },
   asyncData(context) {
     let fireBaseDocument = `${context.params.postId}.json`
-    return axios
-      .get(`${fireBase.url}posts/${fireBaseDocument}`)
+    return $axios
+      .get(`posts/${fireBaseDocument}`)
       .then(axiosResponse => {
         let { data } = axiosResponse
         // asyncData will merge with component data
