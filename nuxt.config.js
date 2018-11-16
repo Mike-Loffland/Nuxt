@@ -1,4 +1,5 @@
-const pkg = require('./package')
+// const pkg = require('./package')
+import { fireBase } from './localconfig.js'
 
 module.exports = {
   mode: 'universal', // take advantage of Nuxt's pre-rendering capabilities
@@ -57,7 +58,7 @@ module.exports = {
   // https://nuxtjs.org/guide/modules/
   modules: ['@nuxtjs/axios'],
   axios: {
-    baseURL: process.env.BASE_URL || 'https://blog-bb78a.firebaseio.com/',
+    baseURL: process.env.BASE_URL || fireBase.url,
   },
 
   /*
