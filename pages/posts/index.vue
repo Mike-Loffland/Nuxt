@@ -4,11 +4,7 @@
   </div>
 </template>
 <script>
-import PostList from '@/components/posts/PostList'
 export default {
-  components: {
-    PostList
-  },
   // nuxt specific lifecycle
   // behaves just like asyncData regarding unning on the server for first page load and on the client after that
   // fetch(context){

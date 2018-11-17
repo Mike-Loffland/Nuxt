@@ -4,6 +4,11 @@
     <nuxt/>
   </div>
 </template>
+<script>
+export default {
+  middleware: ['checkAuth', 'auth'] // order is important... order of execution is left to right.
+}
+</script>
 
 <style>
 html {

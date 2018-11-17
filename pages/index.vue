@@ -7,12 +7,10 @@
   </div>
 </template>
 <script>
-import PostList from '@/components/posts/PostList'
 
 export default {
-  components: {
-    PostList
-  },
+  // middleware property ONLY works on page components
+  middleware: 'log', // name of the file in the middleware folder without the extension
   computed: {
     loadedPosts(){
       return this.$store.getters.loadedPosts

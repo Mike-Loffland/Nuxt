@@ -13,6 +13,7 @@
         <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+        <li class="nav-item"><AppButton @click="onLogout">LOGOUT</AppButton></li>
       </ul>
     </div>
   </header>
@@ -26,8 +27,14 @@ export default {
   name: "TheHeader",
   components: {
     TheSideNavToggle
+  },
+  methods: {
+    onLogout(){
+      this.$store.dispatch('logOut')
+      this.$router.push('/login')
+    }
   }
-};
+}
 </script>
 
 

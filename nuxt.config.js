@@ -73,7 +73,9 @@ module.exports = {
 
   // set environmental variables that will be injected into the project
   env: {
-    baseUrl: process.env.BASE_URL || 'https://blog-bb78a.firebaseio.com/',
+    baseUrl: process.env.BASE_URL || fireBase.url,
+    fireBaseSignup: fireBase.authSignup,
+    fireBaseSignin: fireBase.authSignin,
   },
 
   //set the rootDir... default is '' .. set the path relative to your node_modules folder (essentially)
@@ -97,6 +99,7 @@ module.exports = {
         component: resolve(__dirname, 'pages/index.vue'),
       })
     },
+    middleware: 'log',
     //linkActiveClass: 'some-custom-class',
   },
 
