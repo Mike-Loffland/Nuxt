@@ -1,5 +1,6 @@
 // const pkg = require('./package')
 import { fireBase } from './localconfig.js'
+const bodyParser = require('body-parser')
 
 module.exports = {
   mode: 'universal', // take advantage of Nuxt's pre-rendering capabilities
@@ -107,4 +108,7 @@ module.exports = {
   // generate: {
 
   // }
+
+  // serverMiddleWare: collection of Noade & Express compatible middlewares that will be rendered prior to the Nuxt rendering process
+  serverMiddleware: [bodyParser.json(), '~/api'],
 }

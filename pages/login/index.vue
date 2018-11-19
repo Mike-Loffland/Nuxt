@@ -35,6 +35,7 @@ export default {
         }
       this.$store.dispatch('authenticateUser', authPayload)
         .then(()=> {
+          console.log('in then')
           this.$router.push('/admin')
         })
       // this.$axios.$post(this.authEndpoint, {

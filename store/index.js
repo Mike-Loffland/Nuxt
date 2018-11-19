@@ -112,6 +112,10 @@ const createStore = () => {
             // ** SERVER
             Cookie.set('customjwt', idToken)
             Cookie.set('customjwttime', tokenExpiresDateTime)
+
+            return this.$axios.$post('http://localhost:3000/api/track-data', {
+              data: 'User Authenticated!',
+            })
           })
           .catch(err => {
             let [error] = err.errors
