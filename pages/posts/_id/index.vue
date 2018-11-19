@@ -19,6 +19,14 @@
 export default {
     asyncData(context) {
       let fireBaseDocument = `${context.params.id}.json`
+
+      // has this data already been fetched by generate during the build process?
+      if(context.payload){
+        return {
+          loadedPost: context.payload.mikePrefetchedData
+        }
+      }
+
       return context.app.$axios
         .$get(`posts/${fireBaseDocument}`)
         .then(axiosResponse => {

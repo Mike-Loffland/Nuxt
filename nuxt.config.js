@@ -1,10 +1,11 @@
 // const pkg = require('./package')
 import { fireBase } from './localconfig.js'
 const bodyParser = require('body-parser')
+const axios = require('axios')
 
 module.exports = {
-  mode: 'universal', // take advantage of Nuxt's pre-rendering capabilities
-
+  // mode: 'universal', // take advantage of Nuxt's pre-rendering capabilities (requires Node)
+  // ****** use generate command to build a static version of the universal app (does not require Node)
   // mode: 'spa', // -> Just use Nuxt to take advantage of the route configuration by folder approach and other coniguration (but, no server-side rendering)
 
   /*
@@ -111,4 +112,23 @@ module.exports = {
 
   // serverMiddleWare: collection of Noade & Express compatible middlewares that will be rendered prior to the Nuxt rendering process
   serverMiddleware: [bodyParser.json(), '~/api'],
+
+  generate: {
+    // used for static generation of universal Nuxt apps
+    routes: function() {
+      let ret = []
+      return axios.get(`${fireBase.url}/posts.json`).then(response => {
+        const ret = []
+        Object.keys(response.data).forEach(key => {
+          ret.push({ route: `/posts/${key}`, payload: { mikePrefetchedData: response.data[key] } })
+          // essentially, pre-populate the routes with data so that the standard .get function that wuld have otherwise ran this
+          // get request can just re-use what we've already pre-fetched (by checking the context and using the mikePrefetchedData data instead)
+          // ... see pages/posts/_id/index.vue (in asyncData)
+        })
+        return ret
+      })
+
+      // return ['/posts/-LRU2-VMBW9X_6FMEprD'] // return an array of any dynamic routes that should be pre-rendered
+    },
+  },
 }

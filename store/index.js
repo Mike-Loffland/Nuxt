@@ -140,9 +140,13 @@ const createStore = () => {
             token = jwtCookie.split('=')[1]
             tokenExpireTime = jwtCookieExpire.split('=')[1]
           }
-        } else {
+        } else if (process.client) {
           token = localStorage.getItem('token')
           tokenExpireTime = localStorage.getItem('tokenExpire')
+        } else {
+          // build generation does not have a server nor a client... so, don't worry about it
+          token = null
+          tokenExpireTime = null
         }
 
         // new Date().getTime() converts to milliseconds
