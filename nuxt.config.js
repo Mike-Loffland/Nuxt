@@ -1,4 +1,3 @@
-// const pkg = require('./package')
 import { fireBase } from './localconfig.js'
 const bodyParser = require('body-parser')
 const axios = require('axios')
@@ -17,14 +16,14 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Super cool Nuxt.js WD blog' },
+      { hid: 'description', name: 'description', content: 'Super cool Nuxt.js WD blog' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
 
       //<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    ],
+    ]
   },
 
   /*
@@ -60,7 +59,7 @@ module.exports = {
   // https://nuxtjs.org/guide/modules/
   modules: ['@nuxtjs/axios'],
   axios: {
-    baseURL: process.env.BASE_URL || fireBase.url,
+    baseURL: process.env.BASE_URL || fireBase.url
   },
 
   /*
@@ -70,14 +69,14 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    extend(config, ctx) {}
   },
 
   // set environmental variables that will be injected into the project
   env: {
     baseUrl: process.env.BASE_URL || fireBase.url,
     fireBaseSignup: fireBase.authSignup,
-    fireBaseSignin: fireBase.authSignin,
+    fireBaseSignin: fireBase.authSignin
   },
 
   //set the rootDir... default is '' .. set the path relative to your node_modules folder (essentially)
@@ -90,7 +89,7 @@ module.exports = {
   // use the prefix (as defined in Vue docs)
   transition: {
     name: 'fade',
-    mode: 'out-in',
+    mode: 'out-in'
   },
 
   router: {
@@ -98,10 +97,10 @@ module.exports = {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '/booger',
-        component: resolve(__dirname, 'pages/index.vue'),
+        component: resolve(__dirname, 'pages/index.vue')
       })
     },
-    middleware: 'log',
+    middleware: 'log'
     //linkActiveClass: 'some-custom-class',
   },
 
@@ -129,6 +128,6 @@ module.exports = {
       })
 
       // return ['/posts/-LRU2-VMBW9X_6FMEprD'] // return an array of any dynamic routes that should be pre-rendered
-    },
-  },
+    }
+  }
 }
